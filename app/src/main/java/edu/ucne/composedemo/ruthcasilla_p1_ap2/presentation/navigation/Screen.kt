@@ -5,9 +5,15 @@ import kotlinx.serialization.Serializable
 sealed class Screen {
 
     @Serializable
-    object ListScreen : Screen()
+    object ventaListScreen : Screen()
 
     @Serializable
-    data class RegistroScreen(val Id: Int?) : Screen()
+    object createVentaScreen : Screen()
+
+    @Serializable
+    data class editarVentaScreen(val ventaId: Int) : Screen()
+
+    @Serializable
+    data class eliminarVentaScreen(val ventaId: Int) : Screen()
 
 }

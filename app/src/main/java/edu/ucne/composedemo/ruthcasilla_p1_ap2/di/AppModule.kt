@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import edu.ucne.composedemo.ruthcasilla_p1_ap2.data.local.database.Parcial1Db
+import edu.ucne.composedemo.ruthcasilla_p1_ap2.data.local.database.VentaDb
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -15,15 +15,16 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideAlgoDb(@ApplicationContext appContext: Context) =
+    fun provideVentaDb(@ApplicationContext appContext: Context) =
         Room.databaseBuilder(
             appContext,
-            Parcial1Db::class.java,
-            "AlgoDb.db"
+            VentaDb::class.java,
+            "Venta.db"
         ).fallbackToDestructiveMigration()
             .build()
 
     @Provides
     @Singleton
-    fun provideAlgoDao(parcialDb: Parcial1Db) = parcialDb.algoDao()
+    fun provideVentaDao(ventaDb: VentaDb) = ventaDb.VentasDao()
+
 }

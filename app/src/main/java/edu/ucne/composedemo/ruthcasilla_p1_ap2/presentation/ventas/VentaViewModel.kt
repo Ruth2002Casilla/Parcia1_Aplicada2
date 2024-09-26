@@ -146,17 +146,36 @@ class VentaViewModel @Inject constructor(
         _uiState.update {
             it.copy(precio = precio)
         }
+        calcularTotales()
     }
 
     fun onTotalDescontadoChange(totalDescontado: Double?) {
         _uiState.update {
             it.copy(totalDescontado = totalDescontado)
         }
+        calcularTotales()
     }
 
     fun onTotalChange(total: Double?) {
         _uiState.update {
             it.copy(total = total)
+        }
+        calcularTotales()
+    }
+
+    fun calcularTotales() {
+        val galones = _uiState.value.galones ?: 0.0
+        val descuentoGalon = _uiState.value.descuentoGalon ?: 0.0
+        val precio = _uiState.value.precio ?: 0.0
+
+        val totalDescontado = galones * descuentoGalon
+        val total = (galones * precio) - totalDescontado
+
+        _uiState.update {
+            it.copy(
+                totalDescontado = totalDescontado,
+                total = total
+            )
         }
     }
 
